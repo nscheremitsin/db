@@ -1,0 +1,13 @@
+version: "3.9"
+services:
+  postgres:
+    image: postgres:14.5
+    environment:
+      POSTGRES_DB: "cheremitsin_208"
+      POSTGRES_USER: "cheremitsin_208"
+      POSTGRES_PASSWORD: "cheremitsin_208"
+    volumes:
+      - ./docker/db/scripts:/docker-entrypoint-initdb.d
+      - ./data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
