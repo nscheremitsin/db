@@ -1,13 +1,24 @@
 version: "3.9"
 services:
-  postgres:
+  library:
     image: postgres:14.5
     environment:
       POSTGRES_DB: "cheremitsin_208"
       POSTGRES_USER: "cheremitsin_208"
       POSTGRES_PASSWORD: "cheremitsin_208"
     volumes:
-      - ./docker/db/scripts:/docker-entrypoint-initdb.d
-      - ./data:/var/lib/postgresql/data
+      - ./docker/db/library/scripts:/docker-entrypoint-initdb.d
+#       - ./docker/db/library/data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
+  station:
+    image: postgres:14.5
+    environment:
+      POSTGRES_DB: "cheremitsin_208"
+      POSTGRES_USER: "cheremitsin_208"
+      POSTGRES_PASSWORD: "cheremitsin_208"
+    volumes:
+      - ./docker/db/station/scripts:/docker-entrypoint-initdb.d
+#       - ./docker/db/station/data:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
