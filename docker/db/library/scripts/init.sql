@@ -8,15 +8,16 @@ drop table if exists book_reader cascade;
 
 create table publisher
 (
-    id      integer primary key,
+    id      serial primary key,
     name    varchar,
     address varchar
 );
 
 create table book
 (
-    isbn         integer primary key,
-    pk_publisher integer references publisher (id),
+    id           serial primary key,
+    pk_publisher integer references publisher,
+    isbn         varchar,
     year         integer,
     author       varchar,
     title        varchar,
@@ -25,15 +26,15 @@ create table book
 
 create table copy
 (
-    id        integer primary key,
-    pk_book   integer references book (isbn),
+    id        serial primary key,
+    pk_book   integer references book,
     copy_num  integer,
     shelf_pos integer
 );
 
 create table reader
 (
-    id         integer primary key,
+    id         serial primary key,
     last_name  varchar,
     first_name varchar,
     date_birth date,
@@ -43,21 +44,21 @@ create table reader
 create table copy_reader
 (
     id          integer primary key,
-    pk_copy     integer references copy (id),
-    pk_reader   integer references reader (id),
+    pk_copy     integer references copy,
+    pk_reader   integer references reader,
     date_return date
 );
 
 create table category
 (
-    id                 integer primary key,
-    pk_parent_category integer references category (id),
+    id                 serial primary key,
+    pk_parent_category integer references category,
     name               varchar
 );
 
 create table book_category
 (
-    id          integer primary key,
-    pk_book     integer references book (isbn),
-    pk_category integer references category (id)
+    id          serial primary key,
+    pk_book     integer references book,
+    pk_category integer references category
 );
